@@ -33,10 +33,19 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <script>
-    {{/* This forces the app to use HTML rendering instead of CanvasKit */}}
-    window.flutterWebRenderer = "html";
-  </script>
   <script src="flutter_bootstrap.js" async></script>
+  <script>
+    window.addEventListener('load', function(ev) {
+      _flutter.loader.loadEntrypoint({
+        onEntrypointLoaded: function(engineInitializer) {
+          engineInitializer.initializeEngine({
+            renderer: "html"
+          }).then(function(appRunner) {
+            appRunner.runApp();
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
